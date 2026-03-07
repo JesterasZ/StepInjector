@@ -21,7 +21,6 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.ZoneId
@@ -111,8 +110,6 @@ class InjectionService : Service() {
         var injected     = 0L
 
         for (i in 0 until numBatches) {
-            ensureActive()
-
             val remaining = totalSteps - injected
             if (remaining <= 0) break
 
