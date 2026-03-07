@@ -19,16 +19,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Configurar Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Configurar Gradle 8.4
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: '8.4'
+      - name: Descargar Gradle 8.4
+        run: |
+          curl -sL https://services.gradle.org/distributions/gradle-8.4-bin.zip -o gradle.zip
+          unzip -q gradle.zip
 
       - name: Compilar APK debug
-        run: gradle :app:assembleDebug --no-daemon
+        run: ./gradle-8.4/bin/gradle :app:assembleDebug --no-daemon
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
 
       - name: Subir APK como artefacto
         uses: actions/upload-artifact@v4
