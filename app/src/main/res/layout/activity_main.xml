@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F4F8"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- ── Header ──────────────────────────────────────────── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="👟 Step Injector"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#1565C0" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inyecta pasos en Google Fit / Health Connect"
+            android:textSize="13sp"
+            android:textColor="#607D8B"
+            android:layout_marginBottom="20dp" />
+
+        <!-- ── Status card ──────────────────────────────────────── -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ESTADO"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.12"
+                    android:textColor="#90A4AE"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Iniciando…"
+                    android:textSize="15sp"
+                    android:textColor="#37474F"
+                    android:layout_marginBottom="14dp" />
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressTint="#1976D2"
+                    android:progressBackgroundTint="#E3F2FD"
+                    android:layout_marginBottom="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_injected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:textColor="#1976D2" />
+
+                    <TextView
+                        android:id="@+id/tv_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/ 0 pasos"
+                        android:textSize="14sp"
+                        android:textColor="#90A4AE"
+                        android:paddingStart="8dp"
+                        android:gravity="bottom"
+                        android:paddingBottom="4dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── Configuration card ───────────────────────────────── -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CONFIGURACIÓN"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.12"
+                    android:textColor="#90A4AE"
+                    android:layout_marginBottom="14dp" />
+
+                <!-- Quick presets -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Preajustes rápidos"
+                    android:textSize="13sp"
+                    android:textColor="#607D8B"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_2k"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 000"
+                        style="@style/Widget.MaterialComponents.Chip.Action" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_5k"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5 000"
+                        style="@style/Widget.MaterialComponents.Chip.Action" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_10k"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10 000"
+                        style="@style/Widget.MaterialComponents.Chip.Action" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <!-- Steps input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Número de pasos"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_steps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="5000" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Estimated duration (auto-calculated) -->
+                <TextView
+                    android:id="@+id/tv_estimated_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Duración estimada: —"
+                    android:textSize="13sp"
+                    android:textColor="#607D8B"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Mode -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Modo de inyección"
+                    android:textSize="13sp"
+                    android:textColor="#607D8B"
+                    android:layout_marginBottom="8dp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <RadioButton
+                        android:id="@+id/rb_realtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⏱️  Tiempo real — inyecta lote a lote, gradualmente"
+                        android:textSize="14sp"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/rb_instant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚡  Instantáneo — registra los pasos como histórico pasado"
+                        android:textSize="14sp" />
+
+                </RadioGroup>
+
+                <!-- Natural variation toggle -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Variación natural (±30%)"
+                            android:textSize="14sp"
+                            android:textColor="#37474F" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Simula un paso irregular, más realista"
+                            android:textSize="11sp"
+                            android:textColor="#90A4AE" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_natural"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── Buttons ──────────────────────────────────────────── -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_start"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="▶  INICIAR INYECCIÓN"
+            android:textSize="15sp"
+            android:layout_marginBottom="10dp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="#1976D2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_stop"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="⏹  DETENER"
+            android:textSize="15sp"
+            android:enabled="false"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:cornerRadius="12dp"
+            app:strokeColor="#1976D2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ℹ️  Requiere Health Connect (Android 9+) o Android 14+.\nLos pasos aparecen en Google Fit y Google Salud."
+            android:textSize="11sp"
+            android:textColor="#90A4AE"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.4" />
+
+    </LinearLayout>
+
+</ScrollView>
