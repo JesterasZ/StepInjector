@@ -116,15 +116,15 @@ class InjectionService : Service() {
             val raw   = if (i == numBatches - 1) remaining else basePerBatch
             val steps = applyVariation(raw, remaining, withVariation)
 
-            val ok = insertRecord(client, steps)
-            if (ok) {
+            val error = insertRecord(client, steps)
+            if (error == null) {
                 injected += steps
                 val pct    = ((injected.toFloat() / totalSteps) * 100).toInt()
                 val status = "Inyectando... $pct%  ($injected / $totalSteps)"
                 _progress.value = InjectionProgress(injected, totalSteps, status)
                 updateNotification(pct, totalSteps, status)
             } else {
-                val errMsg = "Error al insertar lote ${i + 1}"
+                val errMsg = "Error lote ${i + 1}: $error"
                 _progress.value = InjectionProgress(injected, totalSteps, errMsg, error = true)
                 stopSelf()
                 return
@@ -195,7 +195,7 @@ class InjectionService : Service() {
 
     // ─── Helpers ──────────────────────────────────────────────────────────────
 
-    private suspend fun insertRecord(client: HealthConnectClient, stepCount: Long): Boolean {
+    private suspend fun insertRecord(client: HealthConnectClient, stepCount: Long): String? {
         return try {
             val now          = Instant.now()
             val walkSecs     = (stepCount * 0.6).toLong().coerceAtLeast(5L)
@@ -213,8 +213,10 @@ class InjectionService : Service() {
                 endTime         = endTime,
                 endZoneOffset   = zone
             )))
-            true
-        } catch (e: Exception) { false }
+            null // null = success
+        } catch (e: Exception) {
+            e.javaClass.simpleName + ": " + e.message
+        }
     }
 
     private fun applyVariation(raw: Long, remaining: Long, enabled: Boolean): Long {
