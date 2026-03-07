@@ -3,14 +3,14 @@ name: Build APK
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:   # permite lanzarlo manualmente desde la web
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Obtener código
+      - name: Obtener codigo
         uses: actions/checkout@v4
 
       - name: Configurar Java 17
@@ -19,17 +19,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Instalar Gradle y generar wrapper
-        run: |
-          curl -L https://services.gradle.org/distributions/gradle-8.4-bin.zip -o gradle.zip
-          unzip -q gradle.zip
-          ./gradle-8.4/bin/gradle wrapper --gradle-version 8.4
-          chmod +x gradlew
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Configurar Gradle 8.4
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.4'
 
       - name: Compilar APK debug
-        run: ./gradlew assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon
 
-      - name: 📦 Subir APK como artefacto
+      - name: Subir APK como artefacto
         uses: actions/upload-artifact@v4
         with:
           name: StepInjector-APK
