@@ -28,7 +28,7 @@ jobs:
           gradle-version: '8.4'
 
       - name: Compilar APK debug
-        run: gradle assembleDebug --no-daemon
+        run: gradle :app:assembleDebug --no-daemon
 
       - name: Subir APK como artefacto
         uses: actions/upload-artifact@v4
