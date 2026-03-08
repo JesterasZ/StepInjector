@@ -202,7 +202,8 @@ class InjectionService : Service() {
             val naturalStart = now.minusSeconds(walkSecs)
             val startTime    = if (naturalStart.isAfter(lastRecordEnd)) naturalStart
                                else lastRecordEnd.plusSeconds(1)
-            val endTime      = startTime.plusSeconds(walkSecs)
+            val endTime      = startTime.plusSeconds(walkSecs).coerceAtMost(now)
+            if (!endTime.isAfter(startTime)) return null
             lastRecordEnd    = endTime
 
             val zone = ZoneId.systemDefault().rules.getOffset(startTime)
